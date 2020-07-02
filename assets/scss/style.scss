@@ -1,0 +1,115 @@
+$primary-color: rgba(0, 0, 255, 0.514);
+$secondary-color: rgba(0, 0, 255, 0.678);
+$flex-vertical: column nowrap;
+$flex-side: row wrap;
+$fontf1: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+$fontf2: Arial, Helvetica, sans-serif;
+
+@mixin flexdisp($ff:null,$ai:null,$jc:null) {
+    display: flex;
+    @if $ff != null{
+        flex-flow: $ff;
+    }
+    @if $ai != null{
+        align-items: $ai;
+    }
+    @if $jc != null{
+        justify-content: $jc;
+    }
+}
+
+* {
+	margin: 0;
+	border: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.header {
+	height: 6rem;
+	text-align: center;
+	font-family: $fontf1;
+    padding: 1.5rem;
+    h1, h2 {
+        font-size: 1rem;
+    }
+}
+
+.nav_links {
+	margin-top: 1rem;
+	@include flexdisp($jc:center);
+	margin-bottom: 1rem;
+    background-color: $primary-color;
+}
+
+li {
+    padding:1rem;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-family: $fontf2;
+}
+
+.main {
+	@include flexdisp($flex-vertical, center, center) ;
+    .section_text > h3 {
+        text-align: center;
+    }
+    
+    .section_text, .section_images {
+        margin: 1rem;
+    }
+
+    .section_images {
+        @include flexdisp($flex-vertical, center, center) ;
+    }
+
+    img {
+        height: 12rem;
+        width: 18rem;
+        margin: 0 0.5rem 1rem 0.5rem
+    }
+}
+
+.aside {
+	@include flexdisp($ff:$flex-vertical, $jc:center) ;
+    margin: 1rem;
+    .first_aside, .second_aside, .third_aside, .fourth_aside {
+        border: 0.2rem solid $secondary-color;    
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.footer {
+	height: 5rem;
+	margin-top: 1rem;
+    background-color: $secondary-color;
+    .footer_links {
+        @include flexdisp($jc:center) ;
+        margin-bottom: 1rem;
+    }
+}
+
+@media screen and (min-width: 600px) {
+	.main{
+        .section_text {
+            width: 70%;
+        }
+
+        .section_images {
+            @include flexdisp($ff:$flex-side) ;
+        }
+    }
+
+	.aside {
+    	@include flexdisp($ff:$flex-side) ;
+        .first_aside, .second_aside, .third_aside, .fourth_aside {
+            width: 45%;
+            margin: 0.5rem;
+        }
+	}
+}
